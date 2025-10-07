@@ -84,6 +84,7 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
     flexDirection: 'column',
     gap: CARD_DIMENSIONS.gap,
     padding: CARD_DIMENSIONS.padding,
+    paddingLeft: 'calc(var(--card-padding) + 6px)',
     borderRadius: CARD_DIMENSIONS.borderRadius,
     background: variantTokens.surface,
     border: '1px solid var(--color-border)',
@@ -104,10 +105,10 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
     position: 'absolute',
     left: 0,
     top: 0,
-    width: '100%',
-    height: '4px',
+    width: '6px',
+    height: '100%',
     borderTopLeftRadius: CARD_DIMENSIONS.borderRadius,
-    borderTopRightRadius: CARD_DIMENSIONS.borderRadius,
+    borderBottomLeftRadius: CARD_DIMENSIONS.borderRadius,
     background: variantTokens.accent,
   };
 
