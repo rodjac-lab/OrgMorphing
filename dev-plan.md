@@ -140,9 +140,10 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 ---
 
-### **Lot 3 : Vue Hiérarchique (Layout statique)**
-**Durée estimée** : 1.5-2 jours  
-**Priorité** : 🔴 Critique  
+### **Lot 3 : Vue Hiérarchique (Layout statique)** ✅ COMPLÉTÉ (Refactorisé)
+**Durée estimée** : 1.5-2 jours
+**Durée réelle** : 2 jours (incluant refactoring)
+**Priorité** : 🔴 Critique
 **Dépendances** : Lot 2
 
 #### Objectifs
@@ -152,39 +153,58 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 #### Tâches
 1. **Layout hiérarchique**
-   - Algorithme de positionnement des cartes en arbre
-   - 3 niveaux : Directeur (niveau 0) → Managers (niveau 1) → Devs (niveau 2)
-   - Espacement et centrage automatiques
-   - Gestion de plusieurs managers par métier
+   - ✅ Algorithme de positionnement des cartes en arbre
+   - ✅ 3 niveaux : Directeur (niveau 0) → Managers (niveau 1) → Devs (niveau 2)
+   - ✅ Espacement et centrage automatiques
+   - ✅ Gestion de plusieurs managers par métier
+   - ✅ Managers groupés visuellement par craft (Cloud, Mobile, Embarqué, Test auto, Infra)
+   - ✅ Colonnes verticales illimitées sous chaque manager
 
 2. **Connexions visuelles**
-   - Lignes reliant les niveaux hiérarchiques
-   - Rendu SVG ou divs positionnées
-   - Style subtil (lignes fines, couleur neutre)
+   - ✅ Lignes reliant les niveaux hiérarchiques
+   - ✅ Rendu SVG
+   - ✅ Connexions en T avec angles droits uniquement (pas de diagonales)
+   - ✅ Style subtil (lignes fines, couleur neutre, pointillés)
 
 3. **Composant container**
-   - `HierarchicalView` component
-   - Utilise `DeveloperCard` pour chaque personne
-   - Calcul des positions basé sur les données
-   - Gestion du viewport (scroll si nécessaire)
+   - ✅ `HierarchicalView` component
+   - ✅ Utilise `DeveloperCard`, `ManagerCard`, `DirectorCard`
+   - ✅ Calcul des positions basé sur les données (`layoutCalculator.js`)
+   - ✅ Gestion du viewport (scroll vertical acceptable)
+   - ✅ Contrôles de zoom manuel (+/- avec affichage du pourcentage)
 
-4. **Responsive**
-   - Adaptation pour écrans moyens
-   - Scroll vertical si trop de développeurs
+4. **Responsive & UX**
+   - ✅ Cartes optimisées à 240px de large pour affichage complet des noms
+   - ✅ Badges de rôle (L, T, S) repositionnés en haut à droite
+   - ✅ Scroll vertical si trop de développeurs
+   - ✅ Pas de scroll horizontal
+   - ✅ Espacement optimisé (40px entre managers, 80px entre crafts)
 
 #### Critères d'acceptation
 - ✅ Tous les développeurs du mock data affichés
 - ✅ Organisation en 3 niveaux claire
 - ✅ Métiers regroupés par manager
 - ✅ Plusieurs managers du même métier gérés correctement
-- ✅ Connexions hiérarchiques visibles
+- ✅ Connexions hiérarchiques visibles (T-shaped, angles droits)
 - ✅ Pas de chevauchement de cartes
 - ✅ Layout esthétique et équilibré
+- ✅ Zoom fonctionnel avec contrôles UI
 
 #### Livrables
-- Composant `HierarchicalView`
-- Algorithme de layout documenté
-- Vue fonctionnelle avec mock data
+- ✅ Composant `HierarchicalView` avec zoom
+- ✅ Algorithme de layout documenté (`layoutCalculator.js`)
+- ✅ Vue fonctionnelle avec mock data
+- ✅ Cartes redimensionnées (240px) avec badges repositionnés
+
+#### Notes de refactoring
+- **Problème initial** : Lignes diagonales, cartes qui se chevauchent, managers manquants
+- **Solution** : Réécriture complète de `layoutCalculator.js` avec algorithme T-shaped, espacement optimisé
+- **Amélioration UX** : Badges repositionnés en haut à droite pour libérer l'espace du nom
+- **Fichiers modifiés** :
+  - `src/utils/layoutCalculator.js` (refactorisé)
+  - `src/components/views/HierarchicalView.jsx` (ajout zoom)
+  - `src/components/cards/DeveloperCard.jsx` (badges repositionnés, largeur 240px)
+  - `src/components/cards/DirectorCard.jsx` (largeur 240px)
 
 ---
 

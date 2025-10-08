@@ -258,13 +258,13 @@ npm install framer-motion papaparse clsx lucide-react react-hot-toast date-fns
 
 ## 📊 État du Projet
 
-### Lot actuel : **Lot 0 - Setup & Architecture**
+### Lot actuel : **Lot 3 - Vue Hiérarchique** ✅ (Refactorisé)
 
 ### Checklist MVP
-- [ ] Lot 0: Setup & Architecture
-- [ ] Lot 1: Data Model & Mock Data
-- [ ] Lot 2: Composant Carte Développeur
-- [ ] Lot 3: Vue Hiérarchique
+- [x] Lot 0: Setup & Architecture
+- [x] Lot 1: Data Model & Mock Data
+- [x] Lot 2: Composant Carte Développeur
+- [x] Lot 3: Vue Hiérarchique (refactorisé avec zoom et layout optimisé)
 - [ ] Lot 4: Vue Fonctionnelle
 - [ ] Lot 5: Morphing Animation
 - [ ] Lot 6: Navigation & UI Controls
@@ -273,6 +273,19 @@ npm install framer-motion papaparse clsx lucide-react react-hot-toast date-fns
 - [ ] Lot 9: Édition In-App
 - [ ] Lot 10: Polish & Responsive
 - [ ] Lot 11: Documentation & Tests
+
+### Lot 3 - Changements récents
+
+**Vue Hiérarchique refactorisée** :
+- ✅ Layout en 3 niveaux : Director → Managers (groupés par craft) → Developers
+- ✅ Connexions en T avec angles droits (pas de diagonales)
+- ✅ Managers groupés visuellement par métier (Cloud, Mobile, Embarqué, etc.)
+- ✅ Colonnes verticales illimitées sous chaque manager
+- ✅ Contrôles de zoom manuel (+/- avec affichage du pourcentage)
+- ✅ Cartes redimensionnées (240px de large) pour affichage complet des noms
+- ✅ Badges de rôle (L, T, S) repositionnés en haut à droite pour libérer l'espace du nom
+- ✅ Espacement optimisé (40px entre managers, 80px entre crafts)
+- ✅ Pas de scroll horizontal, scroll vertical acceptable
 
 ---
 
