@@ -258,14 +258,14 @@ npm install framer-motion papaparse clsx lucide-react react-hot-toast date-fns
 
 ## 📊 État du Projet
 
-### Lot actuel : **Lot 0 - Setup & Architecture**
+### Lot actuel : **Lot 4 - Vue Fonctionnelle** ✅
 
 ### Checklist MVP
-- [ ] Lot 0: Setup & Architecture
-- [ ] Lot 1: Data Model & Mock Data
-- [ ] Lot 2: Composant Carte Développeur
-- [ ] Lot 3: Vue Hiérarchique
-- [ ] Lot 4: Vue Fonctionnelle
+- [x] Lot 0: Setup & Architecture
+- [x] Lot 1: Data Model & Mock Data
+- [x] Lot 2: Composant Carte Développeur
+- [x] Lot 3: Vue Hiérarchique
+- [x] Lot 4: Vue Fonctionnelle
 - [ ] Lot 5: Morphing Animation
 - [ ] Lot 6: Navigation & UI Controls
 - [ ] Lot 7: Export CSV

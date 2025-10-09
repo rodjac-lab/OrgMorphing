@@ -140,10 +140,11 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 ---
 
-### **Lot 3 : Vue Hiérarchique (Layout statique)**
-**Durée estimée** : 1.5-2 jours  
-**Priorité** : 🔴 Critique  
+### **Lot 3 : Vue Hiérarchique (Layout statique)** ✅
+**Durée estimée** : 1.5-2 jours
+**Priorité** : 🔴 Critique
 **Dépendances** : Lot 2
+**Statut** : ✅ Complété
 
 #### Objectifs
 - Implémenter la vue hiérarchique complète
@@ -188,10 +189,11 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 ---
 
-### **Lot 4 : Vue Fonctionnelle (Layout statique)**
-**Durée estimée** : 1.5-2 jours  
-**Priorité** : 🔴 Critique  
+### **Lot 4 : Vue Fonctionnelle (Layout statique)** ✅
+**Durée estimée** : 1.5-2 jours
+**Priorité** : 🔴 Critique
 **Dépendances** : Lot 2
+**Statut** : ✅ Complété
 
 #### Objectifs
 - Implémenter la vue fonctionnelle (squads)
@@ -200,27 +202,34 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 #### Tâches
 1. **Layout des squads**
-   - Algorithme de disposition :
+   - ✅ Algorithme de disposition :
      - Si ≤ 8 squads → rangée unique
      - Si > 8 squads → grille multi-rangées (calcul automatique)
-   - Chaque squad = container avec nom + cartes développeurs
-   - Espacement et alignement
+   - ✅ Chaque squad = container avec nom + cartes développeurs
+   - ✅ Espacement et alignement
 
 2. **Composant Squad**
-   - `SquadContainer` component
-   - Header avec nom de la squad (éditable en V2, statique pour MVP)
-   - Liste des développeurs membres
-   - Style : border subtil, background légèrement différent
+   - ✅ `SquadContainer` component
+   - ✅ Header avec nom de la squad (éditable en V2, statique pour MVP)
+   - ✅ Liste des développeurs membres
+   - ✅ Style : border subtil, background légèrement différent
 
 3. **RTE Header**
-   - Label "RTE: [Nom] - Train Cantal" au-dessus des squads
-   - Style moderne et discret
+   - ✅ Label "RTE: [Nom] - Train Cantal" au-dessus des squads
+   - ✅ Style moderne et discret
 
 4. **Composant container**
-   - `FunctionalView` component
-   - Utilise `SquadContainer` et `DeveloperCard`
-   - Calcul automatique de la grille selon nombre de squads
-   - Gestion du viewport
+   - ✅ `FunctionalView` component
+   - ✅ Utilise `SquadContainer` et `DeveloperCard`
+   - ✅ Calcul automatique de la grille selon nombre de squads
+   - ✅ Gestion du viewport
+
+5. **Zoom Controls** (Ajout)
+   - ✅ Composant `ZoomControls` réutilisable
+   - ✅ Contrôles de zoom dans les headers (au-dessus de "Afficher la séniorité")
+   - ✅ Zoom partagé entre les vues via App.jsx
+   - ✅ Auto-zoom au chargement de chaque vue pour ajuster le contenu
+   - ✅ Pas de chevauchement avec le contenu (positionné hors zone zoomable)
 
 #### Critères d'acceptation
 - ✅ Toutes les squads du mock data affichées
@@ -230,11 +239,16 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 - ✅ Noms des squads affichés
 - ✅ Layout esthétique et équilibré
 - ✅ Pas de scroll horizontal
+- ✅ Contrôles de zoom fonctionnels et bien positionnés
+- ✅ Auto-zoom fonctionnel au chargement des vues
 
 #### Livrables
-- Composant `FunctionalView`
-- Composant `SquadContainer`
-- Algorithme de layout adaptatif documenté
+- ✅ Composant `FunctionalView` (src/components/views/FunctionalView.jsx)
+- ✅ Composant `SquadContainer` (src/components/views/SquadContainer.jsx)
+- ✅ Composant `ZoomControls` (src/components/common/ZoomControls.jsx)
+- ✅ Algorithme de layout adaptatif documenté
+- ✅ Integration dans App.jsx avec gestion du zoom externe
+- ✅ Auto-zoom implémenté pour HierarchicalView et FunctionalView
 
 ---
 
