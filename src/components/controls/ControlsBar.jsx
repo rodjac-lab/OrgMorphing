@@ -37,14 +37,6 @@ function ControlsBar({
     <div className={styles.controlsBar}>
       <div className={styles.leftSection}>
         <h1 className={styles.title}>Outil de Visualisation Organisationnelle</h1>
-        <div className={styles.viewIndicator}>
-          {currentView === 'hierarchical' && (
-            <span className={styles.indicator}>🏢 Vue Hiérarchique</span>
-          )}
-          {currentView === 'functional' && (
-            <span className={styles.indicator}>🎯 Vue Fonctionnelle</span>
-          )}
-        </div>
       </div>
 
       <div className={styles.rightSection}>

@@ -27,21 +27,6 @@
   letter-spacing: -0.02em;
 }
 
-.viewIndicator {
-  display: flex;
-  align-items: center;
-}
-
-.indicator {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
-  padding: 4px 12px;
-  background: var(--color-surface);
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
-}
-
 .rightSection {
   display: flex;
   align-items: center;
@@ -86,11 +71,6 @@
 @media (max-width: 768px) {
   .title {
     font-size: 16px;
-  }
-
-  .indicator {
-    font-size: 12px;
-    padding: 3px 10px;
   }
 
   .rightSection {

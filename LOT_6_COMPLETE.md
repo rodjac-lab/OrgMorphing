@@ -67,10 +67,10 @@ Le Lot 6 a été achevé avec succès! L'interface de contrôle moderne est main
 - ✅ Loading state amélioré
 
 ### 6. Indicateurs Visuels ✓
-- ✅ Badge montrant la vue active dans la ControlsBar
 - ✅ Titre "Outil de Visualisation Organisationnelle" dans la barre
-- ✅ Icônes contextuelles (🏢 Hiérarchique, 🎯 Fonctionnelle)
+- ✅ ViewToggle indique clairement la vue active (segmented control)
 - ✅ Footer avec statut "Lot 6 complété"
+- ✅ Interface épurée sans indicateurs redondants
 
 ---
 
