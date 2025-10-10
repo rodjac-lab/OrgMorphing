@@ -1,0 +1,51 @@
+.importButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--craft-cloud);
+  background: var(--craft-cloud);
+  color: white;
+  border-radius: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.importButton:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.importButton:active {
+  transform: scale(0.98);
+}
+
+.importButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.importButton:focus-visible {
+  outline: 2px solid var(--craft-cloud);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .label {
+    display: none;
+  }
+
+  .importButton {
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .importButton {
+    padding: 5px 8px;
+  }
+}

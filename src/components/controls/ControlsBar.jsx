@@ -12,7 +12,7 @@ import ExportButtons from './ExportButtons.jsx';
  * - Basculement entre vues (hiérarchique/fonctionnelle)
  * - Toggle d'affichage de la séniorité
  * - Contrôles de zoom
- * - Boutons d'export CSV
+ * - Boutons d'export/import XLSX
  *
  * @param {Object} props
  * @param {string} props.currentView - Vue active ('hierarchical' ou 'functional')
@@ -23,7 +23,8 @@ import ExportButtons from './ExportButtons.jsx';
  * @param {Function} props.onZoomIn - Callback pour zoomer
  * @param {Function} props.onZoomOut - Callback pour dézoomer
  * @param {Function} props.onZoomReset - Callback pour réinitialiser le zoom
- * @param {Object} props.orgData - Données de l'organisation (pour export CSV)
+ * @param {Object} props.orgData - Données de l'organisation
+ * @param {Function} props.onDataImported - Callback après import réussi
  * @returns {JSX.Element}
  */
 function ControlsBar({
@@ -35,7 +36,8 @@ function ControlsBar({
   onZoomIn,
   onZoomOut,
   onZoomReset,
-  orgData
+  orgData,
+  onDataImported
 }) {
   return (
     <div className={styles.controlsBar}>
@@ -67,7 +69,7 @@ function ControlsBar({
 
         <div className={styles.divider} />
 
-        <ExportButtons orgData={orgData} />
+        <ExportButtons orgData={orgData} onDataImported={onDataImported} />
       </div>
     </div>
   );

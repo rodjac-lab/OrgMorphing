@@ -21,6 +21,34 @@ function App() {
   const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.1, 0.5));
   const handleZoomReset = () => setZoom(1);
 
+  // Import handler
+  const handleDataImported = (importedDevelopers) => {
+    // Remplacer les développeurs par ceux importés
+    const updatedData = {
+      ...orgData,
+      developers: [...orgData.developers.filter(d => d.isManager), ...importedDevelopers]
+    };
+    setOrgData(updatedData);
+
+    // Recalculer les stats
+    const managers = updatedData.developers.filter(d => d.isManager);
+    const regularDevs = updatedData.developers.filter(d => !d.isManager);
+    const craftCounts = {};
+    updatedData.developers.forEach(dev => {
+      craftCounts[dev.craft] = (craftCounts[dev.craft] || 0) + 1;
+    });
+
+    setStats({
+      totalDevelopers: updatedData.developers.length,
+      managers: managers.length,
+      regularDevelopers: regularDevs.length,
+      squads: updatedData.squads.length,
+      craftCounts
+    });
+
+    console.log('✅ Données importées:', importedDevelopers.length, 'développeurs');
+  };
+
   // Save preferences when they change
   useEffect(() => {
     preferencesService.save({
@@ -86,6 +114,7 @@ function App() {
         onZoomOut={handleZoomOut}
         onZoomReset={handleZoomReset}
         orgData={orgData}
+        onDataImported={handleDataImported}
       />
 
       <main className="app-main">
@@ -152,7 +181,7 @@ function App() {
 
       {/* Footer */}
       <footer className="app-footer">
-        <p>Lot 6 complété ✓ - Navigation & UI Controls</p>
+        <p>Lot 8 complété ✓ - Import/Export XLSX</p>
       </footer>
     </div>
   );

@@ -1,7 +1,7 @@
 # 📊 Statut du Projet - Outil de Visualisation Organisationnelle
 
 **Dernière mise à jour**: 10 octobre 2025
-**Version actuelle**: Lot 7 complété
+**Version actuelle**: Lot 8 complété
 
 ---
 
@@ -11,7 +11,7 @@ Ce document récapitule l'état d'avancement du projet selon le plan de dévelop
 
 ---
 
-## ✅ Lots Complétés (0-5)
+## ✅ Lots Complétés (0-8)
 
 ### Lot 0: Setup & Architecture ✅
 **Statut**: 100% complété
@@ -164,54 +164,89 @@ Ce document récapitule l'état d'avancement du projet selon le plan de dévelop
 
 ---
 
-## 🚧 Lots Restants (6-11)
+### Lot 6: Navigation & UI Controls ✅
+**Statut**: 100% complété
+**Commit**: (à venir après Lot 8)
 
-### Lot 6: Navigation & UI Controls 🎯 PROCHAIN
-**Durée estimée**: 1 jour
-**Priorité**: 🟠 Haute
+**Réalisations**:
+- ✅ Composant `ControlsBar` unifié avec glassmorphism
+- ✅ `ViewToggle` - Segmented control moderne (style iOS/macOS) avec slide animation
+- ✅ `SeniorityToggle` - iOS-style switch avec icône Award
+- ✅ Intégration des `ZoomControls` dans la barre
+- ✅ Intégration des boutons Export/Import
+- ✅ Persistance des préférences en LocalStorage (preferencesService.js)
+- ✅ Design cohérent avec dividers entre sections
+- ✅ Responsive avec breakpoints
 
-**À faire**:
-1. **ControlsBar** - Barre de contrôles moderne sticky en haut
-2. **ViewToggle** - Améliorer le bouton de bascule (design moderne)
-3. **SeniorityToggle** - Transformer le checkbox en toggle moderne
-4. **Indicateurs visuels** - Breadcrumb ou indicateur de vue active
+**Fichiers créés**:
+- `/src/components/controls/ControlsBar.jsx` + `.module.css`
+- `/src/components/controls/ViewToggle.jsx` + `.module.css`
+- `/src/components/controls/SeniorityToggle.jsx` + `.module.css`
+- `/src/services/preferencesService.js`
 
-**Actuellement existant (à améliorer)**:
-- Boutons de vue basiques (3 boutons simples)
-- Checkbox séniorité basique
-- ZoomControls déjà créé (bonus du Lot 4)
-
-**Objectifs**:
-- Interface de contrôle unifiée et moderne
-- Design cohérent style Linear/Notion
-- Keyboard accessible
-- État mémorisé en LocalStorage
-
----
-
-### Lot 7: Export CSV
-**Durée estimée**: 1-1.5 jours
-**Priorité**: 🟠 Haute
-**Dépendances**: Lot 1
-
-**À faire**:
-- Fonction `exportToCSV()` avec PapaParse
-- Fonction `exportTemplateCSV()` pour template vide
-- Boutons d'export dans l'UI
-- Format standardisé compatible Excel
+**Améliorations**:
+- Suppression du badge "vue fonctionnelle" redondant (feedback utilisateur)
+- Interface épurée et moderne
 
 ---
 
-### Lot 8: Import CSV
-**Durée estimée**: 2-2.5 jours
-**Priorité**: 🟠 Haute
-**Dépendances**: Lot 1, Lot 7
+### Lot 7: Export CSV ✅
+**Statut**: 100% complété (remplacé par XLSX dans Lot 8)
+**Commit**: (à venir après Lot 8)
 
-**À faire**:
-- Parsing CSV avec validation robuste
-- Détection des erreurs avec numéros de ligne
-- Modal de confirmation avec résumé des changements
-- Gestion des relations (managers, squads)
+**Réalisations**:
+- ✅ Service `csvService.js` avec PapaParse
+- ✅ Export des données actuelles en CSV
+- ✅ Export template CSV avec exemples
+- ✅ Boutons d'export dans `ExportButtons.jsx`
+- ✅ UTF-8 BOM pour compatibilité Excel
+
+**Fichiers créés**:
+- `/src/services/csvService.js`
+- `/src/components/controls/ExportButtons.jsx` + `.module.css`
+
+**Note**: Lot 7 a été complété puis amélioré en Lot 8 suite au feedback utilisateur sur le format CSV (séparateurs vs colonnes).
+
+---
+
+### Lot 8: Import/Export XLSX ✅
+**Statut**: 100% complété
+**Commit**: (à venir)
+
+**Réalisations**:
+- ✅ Service `xlsxService.js` complet avec librairie xlsx (SheetJS)
+- ✅ Export XLSX avec **colonnes séparées** (amélioration basée sur feedback utilisateur)
+- ✅ Template XLSX pré-formaté avec 3 exemples + sheet "Instructions"
+- ✅ Import XLSX avec validation robuste
+- ✅ Modal de confirmation/erreurs (`ImportConfirmationModal`)
+- ✅ Bouton d'import avec file picker
+- ✅ Fusion intelligente des données (conserve managers, remplace développeurs)
+- ✅ Messages d'erreur détaillés avec numéros de ligne
+- ✅ Auto-dimensionnement des colonnes
+
+**Fichiers créés**:
+- `/src/services/xlsxService.js`
+- `/src/components/controls/ImportButton.jsx` + `.module.css`
+- `/src/components/common/ImportConfirmationModal.jsx` + `.module.css`
+
+**Fichiers modifiés**:
+- `/src/components/controls/ExportButtons.jsx` - Utilise XLSX au lieu de CSV
+- `/src/components/controls/ControlsBar.jsx` - Passe callback onDataImported
+- `/src/App.jsx` - Fonction handleDataImported + recalcul stats
+
+**Validation**:
+- Métier: Backend, Frontend, Fullstack, DevOps, Mobile, Data, QA
+- Séniorité: 1-4
+- Booléens: "Oui" ou "Non"
+
+**User Journey optimisée**:
+- L'utilisateur saisit directement dans Excel avec colonnes séparées
+- Plus besoin de modifier les séparateurs
+- Template prêt à l'emploi avec instructions
+
+---
+
+## 🚧 Lots Restants (9-11)
 
 ---
 
@@ -257,24 +292,25 @@ Ce document récapitule l'état d'avancement du projet selon le plan de dévelop
 
 ## 📈 Progression Globale
 
-**Lots complétés**: 7/12 (0-6) = **58%**
-**Durée estimée restante**: 10-14 jours
+**Lots complétés**: 9/12 (0-8) = **75%** 🎉
+**Durée estimée restante**: 4-6 jours
 
 ### Répartition
 - 🔴 Critique (Lots 0-4): ✅ Complétés
-- 🟠 Haute (Lots 5-8): ✅ 2/4 complétés (Lots 5-6)
-- 🟡 Moyenne (Lots 9-11): ⏳ À faire
+- 🟠 Haute (Lots 5-8): ✅ Complétés
+- 🟡 Moyenne (Lots 9-11): ⏳ À faire (25% restant)
 
 ---
 
 ## 🎯 Recommandations pour la suite
 
-### Immédiat: Lots 7-8 (Import/Export CSV)
-Ces lots sont critiques pour l'utilisabilité:
-- Permettent la saisie massive de données
-- Essentiels pour le workflow réel
+### Immédiat: Lot 9 (Édition In-App)
+Ce lot apportera la dernière fonctionnalité majeure:
+- Édition inline des développeurs
+- Ajout/suppression de personnes
+- Formulaires modaux
 
-**Estimation**: 3-4 jours combinés
+**Estimation**: 2-3 jours
 
 ---
 
@@ -339,9 +375,9 @@ Ces lots sont critiques pour l'utilisabilité:
 
 ## ✨ Prochaines Actions Recommandées
 
-1. **Démarrer le Lot 6** - Navigation & UI Controls
-2. Créer le composant `ControlsBar` unifié
-3. Moderniser les toggles et boutons
-4. Persister les préférences utilisateur
+1. **Démarrer le Lot 9** - Édition In-App
+2. Créer les formulaires d'édition de développeurs
+3. Implémenter les actions CRUD dans l'UI
+4. Ajouter validation côté client
 
-**Question**: Voulez-vous que je commence le Lot 6 maintenant ?
+**75% du MVP complété!** Plus que 3 lots restants pour finaliser le projet.
