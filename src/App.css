@@ -3,7 +3,19 @@
   display: flex;
   flex-direction: column;
   background: var(--color-background);
-  padding: var(--spacing-2xl);
+}
+
+/* Loading state */
+.app.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 .app-header {
@@ -24,9 +36,25 @@
 }
 
 .app-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-2xl);
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: var(--spacing-xl);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 .stats-section {

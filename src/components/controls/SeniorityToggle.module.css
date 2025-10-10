@@ -1,0 +1,99 @@
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.icon {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+/* Switch iOS-style */
+.switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  background: var(--color-border);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.switch:hover {
+  background: #d1d5db;
+}
+
+.switch.enabled {
+  background: var(--craft-cloud);
+}
+
+.switch.enabled:hover {
+  background: #2563eb;
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--craft-cloud);
+  outline-offset: 2px;
+}
+
+/* Slider (le cercle qui glisse) */
+.slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch.enabled .slider {
+  transform: translateX(18px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .label {
+    font-size: 12px;
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .switch {
+    width: 38px;
+    height: 22px;
+  }
+
+  .slider {
+    width: 18px;
+    height: 18px;
+  }
+
+  .switch.enabled .slider {
+    transform: translateX(16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .label {
+    display: none;
+  }
+}
