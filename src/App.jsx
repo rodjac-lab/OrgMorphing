@@ -85,6 +85,7 @@ function App() {
         onZoomIn={handleZoomIn}
         onZoomOut={handleZoomOut}
         onZoomReset={handleZoomReset}
+        orgData={orgData}
       />
 
       <main className="app-main">

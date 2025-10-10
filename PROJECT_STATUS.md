@@ -1,7 +1,7 @@
 # 📊 Statut du Projet - Outil de Visualisation Organisationnelle
 
 **Dernière mise à jour**: 10 octobre 2025
-**Version actuelle**: Lot 6 complété
+**Version actuelle**: Lot 7 complété
 
 ---
 

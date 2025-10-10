@@ -3,6 +3,7 @@ import styles from './ControlsBar.module.css';
 import ViewToggle from './ViewToggle.jsx';
 import SeniorityToggle from './SeniorityToggle.jsx';
 import ZoomControls from '../common/ZoomControls.jsx';
+import ExportButtons from './ExportButtons.jsx';
 
 /**
  * ControlsBar - Barre de contrôles principale de l'application
@@ -11,6 +12,7 @@ import ZoomControls from '../common/ZoomControls.jsx';
  * - Basculement entre vues (hiérarchique/fonctionnelle)
  * - Toggle d'affichage de la séniorité
  * - Contrôles de zoom
+ * - Boutons d'export CSV
  *
  * @param {Object} props
  * @param {string} props.currentView - Vue active ('hierarchical' ou 'functional')
@@ -21,6 +23,7 @@ import ZoomControls from '../common/ZoomControls.jsx';
  * @param {Function} props.onZoomIn - Callback pour zoomer
  * @param {Function} props.onZoomOut - Callback pour dézoomer
  * @param {Function} props.onZoomReset - Callback pour réinitialiser le zoom
+ * @param {Object} props.orgData - Données de l'organisation (pour export CSV)
  * @returns {JSX.Element}
  */
 function ControlsBar({
@@ -31,7 +34,8 @@ function ControlsBar({
   zoom,
   onZoomIn,
   onZoomOut,
-  onZoomReset
+  onZoomReset,
+  orgData
 }) {
   return (
     <div className={styles.controlsBar}>
@@ -60,6 +64,10 @@ function ControlsBar({
           onZoomOut={onZoomOut}
           onZoomReset={onZoomReset}
         />
+
+        <div className={styles.divider} />
+
+        <ExportButtons orgData={orgData} />
       </div>
     </div>
   );

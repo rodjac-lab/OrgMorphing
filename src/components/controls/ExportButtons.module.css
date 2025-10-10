@@ -1,0 +1,81 @@
+.exportButtons {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.exportButton,
+.templateButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  background: white;
+  border-radius: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.exportButton:hover,
+.templateButton:hover {
+  background: var(--color-surface);
+  border-color: var(--craft-cloud);
+  color: var(--craft-cloud);
+}
+
+.exportButton:active,
+.templateButton:active {
+  transform: scale(0.98);
+}
+
+.exportButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.exportButton:focus-visible,
+.templateButton:focus-visible {
+  outline: 2px solid var(--craft-cloud);
+  outline-offset: 2px;
+}
+
+/* Style spécial pour le bouton Export principal */
+.exportButton {
+  background: var(--craft-cloud);
+  color: white;
+  border-color: var(--craft-cloud);
+}
+
+.exportButton:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .label {
+    display: none;
+  }
+
+  .exportButton,
+  .templateButton {
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exportButtons {
+    gap: 4px;
+  }
+
+  .exportButton,
+  .templateButton {
+    padding: 5px 8px;
+  }
+}
