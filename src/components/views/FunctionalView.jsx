@@ -18,13 +18,14 @@ import SquadContainer from './SquadContainer.jsx';
  * @property {(person: any) => void} [onPersonClick] - Click handler for person cards
  * @property {number} [zoom=1] - Zoom level (0.5 to 1.5), controlled externally
  * @property {(zoom: number) => void} [onZoomChange] - Callback to update zoom level
+ * @property {string} [staggerStrategy] - Stagger strategy for morphing animation
  */
 
 /**
  * FunctionalView component with external zoom control and auto-zoom
  * @param {FunctionalViewProps} props
  */
-function FunctionalView({ orgData, showSeniority = false, onPersonClick, zoom = 1, onZoomChange }) {
+function FunctionalView({ orgData, showSeniority = false, onPersonClick, zoom = 1, onZoomChange, staggerStrategy }) {
   const { rte, squads, developers } = orgData;
   const containerRef = useRef(null);
   const contentRef = useRef(null);
@@ -129,15 +130,26 @@ function FunctionalView({ orgData, showSeniority = false, onPersonClick, zoom = 
 
         {/* Squads container */}
         <div style={layoutStyle}>
-          {squads.map((squad) => (
-            <SquadContainer
-              key={squad.id}
-              squad={squad}
-              members={developersBySquad[squad.id] || []}
-              showSeniority={showSeniority}
-              onPersonClick={onPersonClick}
-            />
-          ))}
+          {squads.map((squad, squadIndex) => {
+            // Calculate global card offset for this squad
+            let globalCardOffset = 0;
+            for (let i = 0; i < squadIndex; i++) {
+              globalCardOffset += (developersBySquad[squads[i].id] || []).length;
+            }
+
+            return (
+              <SquadContainer
+                key={squad.id}
+                squad={squad}
+                members={developersBySquad[squad.id] || []}
+                showSeniority={showSeniority}
+                onPersonClick={onPersonClick}
+                squadIndex={squadIndex}
+                globalCardOffset={globalCardOffset}
+                staggerStrategy={staggerStrategy}
+              />
+            );
+          })}
         </div>
 
         {/* Empty state if no squads */}

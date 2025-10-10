@@ -1,31 +1,15 @@
 /**
  * SquadContainer Component
- *
- * Container for a squad showing:
- * - Squad name header
- * - List of squad members (developers)
- * - Subtle border and background
  */
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import DeveloperCard from '../cards/DeveloperCard.jsx';
+import { TRANSITION_CONFIG, calculateCardDelay } from '../../utils/morphingConfig.js';
 
-/**
- * @typedef {Object} SquadContainerProps
- * @property {import('../../data/types.js').Squad} squad - Squad data
- * @property {import('../../data/types.js').Developer[]} members - Developers in this squad
- * @property {boolean} [showSeniority=false] - Whether to show seniority badges
- * @property {(person: any) => void} [onPersonClick] - Click handler for person cards
- */
-
-/**
- * SquadContainer component
- * @param {SquadContainerProps} props
- */
-function SquadContainer({ squad, members, showSeniority = false, onPersonClick }) {
+function SquadContainer({ squad, members, showSeniority = false, onPersonClick, squadIndex = 0, globalCardOffset = 0, staggerStrategy }) {
   return (
     <div style={styles.container}>
-      {/* Squad header */}
       <div style={styles.header}>
         <h3 style={styles.squadName}>{squad.name}</h3>
         <span style={styles.memberCount}>
@@ -33,17 +17,32 @@ function SquadContainer({ squad, members, showSeniority = false, onPersonClick }
         </span>
       </div>
 
-      {/* Squad members */}
       <div style={styles.membersContainer}>
-        {members.map((member) => (
-          <div key={member.id} style={styles.cardWrapper}>
-            <DeveloperCard
-              developer={member}
-              showSeniority={showSeniority}
-              onClick={onPersonClick ? () => onPersonClick(member) : undefined}
-            />
-          </div>
-        ))}
+        {members.map((member, cardIndexInSquad) => {
+          const globalCardIndex = globalCardOffset + cardIndexInSquad;
+          const delay = calculateCardDelay(globalCardIndex, squadIndex, cardIndexInSquad, staggerStrategy);
+
+          return (
+            <motion.div
+              key={member.id}
+              layoutId={`person-${member.id}`}
+              style={styles.cardWrapper}
+              transition={{
+                layout: {
+                  duration: TRANSITION_CONFIG.duration,
+                  ease: TRANSITION_CONFIG.ease,
+                  delay: delay,
+                }
+              }}
+            >
+              <DeveloperCard
+                developer={member}
+                showSeniority={showSeniority}
+                onClick={onPersonClick ? () => onPersonClick(member) : undefined}
+              />
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
@@ -86,9 +85,7 @@ const styles = {
     flexDirection: 'column',
     gap: '12px',
   },
-  cardWrapper: {
-    // Cards are already sized at 240px
-  },
+  cardWrapper: {},
 };
 
 export default React.memo(SquadContainer);

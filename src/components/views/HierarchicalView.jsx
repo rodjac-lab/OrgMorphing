@@ -11,6 +11,7 @@
  */
 
 import React, { useMemo, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import DeveloperCard from '../cards/DeveloperCard.jsx';
 import ManagerCard from '../cards/ManagerCard.jsx';
 import DirectorCard from '../cards/DirectorCard.jsx';
@@ -19,6 +20,7 @@ import {
   calculateHierarchicalConnections,
   calculateHierarchicalDimensions,
 } from '../../utils/layoutCalculator.js';
+import { TRANSITION_CONFIG } from '../../utils/morphingConfig.js';
 
 /**
  * @typedef {Object} HierarchicalViewProps
@@ -92,7 +94,10 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
           height: dimensions.height,
         }}
       >
-        <svg
+        <motion.svg
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
           style={{
             ...styles.svg,
             width: dimensions.width,
@@ -113,21 +118,28 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
               opacity="0.6"
             />
           ))}
-        </svg>
+        </motion.svg>
 
         {/* Director card */}
-        <div
+        <motion.div
+          layoutId={`person-${director.id}`}
           style={{
             ...styles.card,
             left: positions.get(director.id)?.x || 0,
             top: positions.get(director.id)?.y || 0,
+          }}
+          transition={{
+            layout: {
+              duration: TRANSITION_CONFIG.duration,
+              ease: TRANSITION_CONFIG.ease,
+            }
           }}
         >
           <DirectorCard
             director={director}
             onClick={onPersonClick ? () => onPersonClick(director) : undefined}
           />
-        </div>
+        </motion.div>
 
         {/* Manager cards */}
         {managers.map(manager => {
@@ -135,12 +147,19 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
           if (!pos) return null;
 
           return (
-            <div
+            <motion.div
               key={manager.id}
+              layoutId={`person-${manager.id}`}
               style={{
                 ...styles.card,
                 left: pos.x,
                 top: pos.y,
+              }}
+              transition={{
+                layout: {
+                  duration: TRANSITION_CONFIG.duration,
+                  ease: TRANSITION_CONFIG.ease,
+                }
               }}
             >
               <ManagerCard
@@ -148,7 +167,7 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
                 showSeniority={showSeniority}
                 onClick={onPersonClick ? () => onPersonClick(manager) : undefined}
               />
-            </div>
+            </motion.div>
           );
         })}
 
@@ -158,12 +177,19 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
           if (!pos) return null;
 
           return (
-            <div
+            <motion.div
               key={dev.id}
+              layoutId={`person-${dev.id}`}
               style={{
                 ...styles.card,
                 left: pos.x,
                 top: pos.y,
+              }}
+              transition={{
+                layout: {
+                  duration: TRANSITION_CONFIG.duration,
+                  ease: TRANSITION_CONFIG.ease,
+                }
               }}
             >
               <DeveloperCard
@@ -171,7 +197,7 @@ function HierarchicalView({ orgData, showSeniority = false, onPersonClick, zoom 
                 showSeniority={showSeniority}
                 onClick={onPersonClick ? () => onPersonClick(dev) : undefined}
               />
-            </div>
+            </motion.div>
           );
         })}
       </div>

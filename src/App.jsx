@@ -65,7 +65,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>Outil de Visualisation Organisationnelle</h1>
-        <p className="subtitle">Lot 4 complété ✓ - Vue Fonctionnelle</p>
+        <p className="subtitle">Lot 5 complété ✓ - Morphing Animation</p>
       </header>
 
       <main className="app-main">

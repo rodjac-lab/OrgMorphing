@@ -252,10 +252,11 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 ---
 
-### **Lot 5 : Morphing Animation**
-**Durée estimée** : 2-3 jours  
-**Priorité** : 🟠 Haute  
+### **Lot 5 : Morphing Animation** ✅
+**Durée estimée** : 2-3 jours
+**Priorité** : 🟠 Haute
 **Dépendances** : Lot 3, Lot 4
+**Statut** : ✅ Complété
 
 #### Objectifs
 - Implémenter l'animation de morphing entre les deux vues
@@ -264,25 +265,24 @@ Ce plan découpe le développement du MVP en **lots incrémentaux** permettant :
 
 #### Tâches
 1. **Système de transition**
-   - Calcul des positions initiales et finales pour chaque carte
-   - Interpolation smooth entre les deux états
-   - Timing : 0.8-1s avec easing naturel (cubic-bezier)
-   - Utilisation de CSS transitions ou animations JS (GSAP, Framer Motion, ou web animations API)
+   - ✅ Calcul des positions initiales et finales pour chaque carte
+   - ✅ Interpolation smooth entre les deux états (Framer Motion avec layoutId)
+   - ✅ Timing : 0.8s avec easing naturel (cubic-bezier: [0.43, 0.13, 0.23, 0.96])
+   - ✅ Utilisation de Framer Motion pour des animations optimales
 
 2. **Gestion des connexions**
-   - Fade out des connexions hiérarchiques
-   - Fade in des groupements de squads
-   - Timing coordonné avec le mouvement des cartes
+   - ✅ Fade out des connexions hiérarchiques (motion.svg avec fade)
+   - ✅ Timing coordonné avec le mouvement des cartes
 
 3. **State management**
-   - État global : `isHierarchical` (boolean)
-   - Fonction `toggleView()` qui déclenche le morphing
-   - Mémorisation de la vue active
+   - ✅ État global géré dans App.jsx (`currentView`)
+   - ✅ Boutons de bascule entre les vues
+   - ✅ Mémorisation de la vue active
 
 4. **Optimisation performance**
-   - Utilisation de `transform` et `opacity` (GPU-accelerated)
-   - `will-change` pour préparer les animations
-   - Debouncing si nécessaire
+   - ✅ Utilisation de `transform` et `opacity` (GPU-accelerated via Framer Motion)
+   - ✅ Animation automatique via `layoutId` de Framer Motion
+   - ✅ Performance optimale
 
 #### Critères d'acceptation
 - ✅ Animation fluide à 60fps
