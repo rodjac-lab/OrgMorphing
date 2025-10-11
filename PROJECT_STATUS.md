@@ -246,20 +246,45 @@ Ce document récapitule l'état d'avancement du projet selon le plan de dévelop
 
 ---
 
-## 🚧 Lots Restants (9-11)
+---
+
+### Lot 9: Édition In-App ✅
+**Statut**: 100% complété
+**Commit**: (à venir)
+
+**Réalisations**:
+- ✅ Modal de formulaire complet (création/édition)
+- ✅ Bouton "Ajouter" dans ControlsBar
+- ✅ Cartes développeur cliquables
+- ✅ Opérations CRUD complètes (Create, Update, Delete)
+- ✅ Validation côté client avec messages d'erreur
+- ✅ Suppression avec confirmation inline
+- ✅ Persistance automatique en LocalStorage
+- ✅ Recalcul automatique des statistiques
+- ✅ Squad optionnelle (corner case pour managers sans squad)
+
+**Fichiers créés**:
+- `/src/components/forms/DeveloperFormModal.jsx` + `.module.css`
+
+**Fichiers modifiés**:
+- `/src/components/controls/ControlsBar.jsx` + `.module.css` - Bouton "Ajouter"
+- `/src/App.jsx` - Handlers CRUD + state modal
+- `/src/styles/variables.css` - Variables CSS manquantes (fix bugs)
+
+**Bugs corrigés**:
+- Variables CSS manquantes (--color-blue, --color-red)
+- Import incorrect (saveOrgData → saveData)
+- Métier "Embarqué" ajouté à la liste
+- Squad rendue optionnelle (validation supprimée)
+
+**Workflow utilisateur**:
+- Ajouter: Bouton "Ajouter" → Formulaire → "Créer"
+- Éditer: Clic carte → Formulaire pré-rempli → "Enregistrer"
+- Supprimer: Édition → "Supprimer" → Confirmation "Oui/Non"
 
 ---
 
-### Lot 9: Édition In-App
-**Durée estimée**: 2-3 jours
-**Priorité**: 🟡 Moyenne
-**Dépendances**: Lot 1, Lot 2
-
-**À faire**:
-- Formulaires d'édition (développeurs, managers, squads)
-- Actions CRUD dans l'interface
-- Modal/Sidebar d'édition
-- Validation côté client
+## 🚧 Lots Restants (10-11)
 
 ---
 
@@ -292,25 +317,26 @@ Ce document récapitule l'état d'avancement du projet selon le plan de dévelop
 
 ## 📈 Progression Globale
 
-**Lots complétés**: 9/12 (0-8) = **75%** 🎉
-**Durée estimée restante**: 4-6 jours
+**Lots complétés**: 10/12 (0-9) = **83%** 🎉
+**Durée estimée restante**: 2-4 jours
 
 ### Répartition
 - 🔴 Critique (Lots 0-4): ✅ Complétés
 - 🟠 Haute (Lots 5-8): ✅ Complétés
-- 🟡 Moyenne (Lots 9-11): ⏳ À faire (25% restant)
+- 🟡 Moyenne (Lots 9-11): ✅ 1/3 complété (Lot 9 ✅)
 
 ---
 
 ## 🎯 Recommandations pour la suite
 
-### Immédiat: Lot 9 (Édition In-App)
-Ce lot apportera la dernière fonctionnalité majeure:
-- Édition inline des développeurs
-- Ajout/suppression de personnes
-- Formulaires modaux
+### Immédiat: Lot 10 (Polish & Responsive)
+Ce lot finalisera le design et l'expérience utilisateur:
+- Design polish (espacements, couleurs, micro-animations)
+- Responsive mobile/tablette
+- Optimisation performance
+- Accessibilité WCAG AA
 
-**Estimation**: 2-3 jours
+**Estimation**: 1.5-2 jours
 
 ---
 
@@ -375,9 +401,10 @@ Ce lot apportera la dernière fonctionnalité majeure:
 
 ## ✨ Prochaines Actions Recommandées
 
-1. **Démarrer le Lot 9** - Édition In-App
-2. Créer les formulaires d'édition de développeurs
-3. Implémenter les actions CRUD dans l'UI
-4. Ajouter validation côté client
+1. **Démarrer le Lot 10** - Polish & Responsive
+2. Affiner les espacements et animations
+3. Adapter l'UI pour mobile et tablette
+4. Optimiser les performances
+5. Améliorer l'accessibilité
 
-**75% du MVP complété!** Plus que 3 lots restants pour finaliser le projet.
+**83% du MVP complété!** Plus que 2 lots restants pour finaliser le projet.

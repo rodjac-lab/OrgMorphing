@@ -12,6 +12,15 @@
   --color-border: #e5e7eb;
   --color-text-primary: #1f2937;
   --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+
+  /* Couleurs d'action */
+  --color-blue: #3b82f6;
+  --color-red: #ef4444;
+  --color-green: #10b981;
+  --color-yellow: #f59e0b;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
 
   /* Espacements */
   --spacing-xs: 4px;

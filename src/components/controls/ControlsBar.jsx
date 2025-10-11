@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserPlus } from 'lucide-react';
 import styles from './ControlsBar.module.css';
 import ViewToggle from './ViewToggle.jsx';
 import SeniorityToggle from './SeniorityToggle.jsx';
@@ -25,6 +26,7 @@ import ExportButtons from './ExportButtons.jsx';
  * @param {Function} props.onZoomReset - Callback pour réinitialiser le zoom
  * @param {Object} props.orgData - Données de l'organisation
  * @param {Function} props.onDataImported - Callback après import réussi
+ * @param {Function} props.onAddDeveloper - Callback pour ajouter un développeur
  * @returns {JSX.Element}
  */
 function ControlsBar({
@@ -37,7 +39,8 @@ function ControlsBar({
   onZoomOut,
   onZoomReset,
   orgData,
-  onDataImported
+  onDataImported,
+  onAddDeveloper
 }) {
   return (
     <div className={styles.controlsBar}>
@@ -46,6 +49,17 @@ function ControlsBar({
       </div>
 
       <div className={styles.rightSection}>
+        <button
+          className={styles.addButton}
+          onClick={onAddDeveloper}
+          title="Ajouter un développeur"
+        >
+          <UserPlus size={18} />
+          <span>Ajouter</span>
+        </button>
+
+        <div className={styles.divider} />
+
         <ViewToggle
           currentView={currentView}
           onViewChange={onViewChange}

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { initializeData } from './services/dataService.js';
+import { saveData } from './services/storage.js';
 import preferencesService from './services/preferencesService.js';
 import ControlsBar from './components/controls/ControlsBar.jsx';
 import HierarchicalView from './components/views/HierarchicalView.jsx';
 import FunctionalView from './components/views/FunctionalView.jsx';
+import DeveloperFormModal from './components/forms/DeveloperFormModal.jsx';
 
 function App() {
   const [orgData, setOrgData] = useState(null);
@@ -16,10 +18,32 @@ function App() {
   const [currentView, setCurrentView] = useState(initialPrefs.currentView);
   const [zoom, setZoom] = useState(initialPrefs.zoom);
 
+  // Modal state for developer form
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingDeveloper, setEditingDeveloper] = useState(null);
+
   // Zoom handlers
   const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.1, 1.5));
   const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.1, 0.5));
   const handleZoomReset = () => setZoom(1);
+
+  // Helper to recalculate stats
+  const recalculateStats = (data) => {
+    const managers = data.developers.filter(d => d.isManager);
+    const regularDevs = data.developers.filter(d => !d.isManager);
+    const craftCounts = {};
+    data.developers.forEach(dev => {
+      craftCounts[dev.craft] = (craftCounts[dev.craft] || 0) + 1;
+    });
+
+    setStats({
+      totalDevelopers: data.developers.length,
+      managers: managers.length,
+      regularDevelopers: regularDevs.length,
+      squads: data.squads.length,
+      craftCounts
+    });
+  };
 
   // Import handler
   const handleDataImported = (importedDevelopers) => {
@@ -29,24 +53,53 @@ function App() {
       developers: [...orgData.developers.filter(d => d.isManager), ...importedDevelopers]
     };
     setOrgData(updatedData);
-
-    // Recalculer les stats
-    const managers = updatedData.developers.filter(d => d.isManager);
-    const regularDevs = updatedData.developers.filter(d => !d.isManager);
-    const craftCounts = {};
-    updatedData.developers.forEach(dev => {
-      craftCounts[dev.craft] = (craftCounts[dev.craft] || 0) + 1;
-    });
-
-    setStats({
-      totalDevelopers: updatedData.developers.length,
-      managers: managers.length,
-      regularDevelopers: regularDevs.length,
-      squads: updatedData.squads.length,
-      craftCounts
-    });
-
+    recalculateStats(updatedData);
+    saveData(updatedData);
     console.log('✅ Données importées:', importedDevelopers.length, 'développeurs');
+  };
+
+  // CRUD Handlers
+  const handleAddDeveloper = () => {
+    setEditingDeveloper(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEditDeveloper = (developer) => {
+    // Ne permettre l'édition que des développeurs (pas des managers)
+    if (!developer.isManager) {
+      setEditingDeveloper(developer);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleSaveDeveloper = (developerData) => {
+    let updatedDevelopers;
+
+    if (editingDeveloper) {
+      // Mode édition - remplacer le développeur existant
+      updatedDevelopers = orgData.developers.map(dev =>
+        dev.id === editingDeveloper.id ? developerData : dev
+      );
+      console.log('✏️ Développeur modifié:', developerData);
+    } else {
+      // Mode création - ajouter le nouveau développeur
+      updatedDevelopers = [...orgData.developers, developerData];
+      console.log('➕ Développeur ajouté:', developerData);
+    }
+
+    const updatedData = { ...orgData, developers: updatedDevelopers };
+    setOrgData(updatedData);
+    recalculateStats(updatedData);
+    saveData(updatedData);
+  };
+
+  const handleDeleteDeveloper = (developerId) => {
+    const updatedDevelopers = orgData.developers.filter(dev => dev.id !== developerId);
+    const updatedData = { ...orgData, developers: updatedDevelopers };
+    setOrgData(updatedData);
+    recalculateStats(updatedData);
+    saveData(updatedData);
+    console.log('🗑️ Développeur supprimé:', developerId);
   };
 
   // Save preferences when they change
@@ -115,6 +168,7 @@ function App() {
         onZoomReset={handleZoomReset}
         orgData={orgData}
         onDataImported={handleDataImported}
+        onAddDeveloper={handleAddDeveloper}
       />
 
       <main className="app-main">
@@ -125,9 +179,7 @@ function App() {
             showSeniority={showSeniority}
             zoom={zoom}
             onZoomChange={setZoom}
-            onPersonClick={(person) => {
-              console.log('Person clicked:', person);
-            }}
+            onPersonClick={handleEditDeveloper}
           />
         )}
 
@@ -138,9 +190,7 @@ function App() {
             showSeniority={showSeniority}
             zoom={zoom}
             onZoomChange={setZoom}
-            onPersonClick={(person) => {
-              console.log('Person clicked:', person);
-            }}
+            onPersonClick={handleEditDeveloper}
           />
         )}
 
@@ -181,8 +231,19 @@ function App() {
 
       {/* Footer */}
       <footer className="app-footer">
-        <p>Lot 8 complété ✓ - Import/Export XLSX</p>
+        <p>Lot 9 complété ✓ - Édition In-App (CRUD)</p>
       </footer>
+
+      {/* Developer Form Modal */}
+      <DeveloperFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveDeveloper}
+        onDelete={handleDeleteDeveloper}
+        developer={editingDeveloper}
+        managers={orgData.developers.filter(d => d.isManager)}
+        squads={orgData.squads}
+      />
     </div>
   );
 }
