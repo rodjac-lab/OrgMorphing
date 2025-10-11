@@ -1,0 +1,241 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+  padding: var(--spacing-2xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2xl);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* === ICON ANIMATION === */
+
+.iconWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconPulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--craft-cloud);
+  opacity: 0.2;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.icon {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.2));
+}
+
+.circle {
+  animation: rotate 2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cross {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* === TEXT === */
+
+.textWrapper {
+  text-align: center;
+  animation: fadeInUp 0.6s var(--ease-out-expo) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-sm) 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* === PROGRESS BAR === */
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  animation: fadeInUp 0.6s var(--ease-out-expo) forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--craft-cloud),
+    var(--craft-infra),
+    var(--craft-cloud)
+  );
+  background-size: 200% 100%;
+  animation: progress 2s ease-in-out infinite;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+    background-position: 0% 50%;
+  }
+  50% {
+    width: 100%;
+    background-position: 100% 50%;
+  }
+  100% {
+    width: 100%;
+    background-position: 200% 50%;
+  }
+}
+
+/* === SKELETON CARDS === */
+
+.skeletonPreview {
+  display: flex;
+  gap: var(--spacing-md);
+  width: 100%;
+  justify-content: center;
+  animation: fadeInUp 0.6s var(--ease-out-expo) forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.skeletonCard {
+  width: 100px;
+  height: 60px;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    var(--color-surface) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  animation: shimmer 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--craft-cloud);
+  opacity: 0.5;
+  border-radius: 8px 0 0 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeletonCard.delay1 {
+  animation-delay: 0s;
+}
+
+.skeletonCard.delay2 {
+  animation-delay: 0.15s;
+}
+
+.skeletonCard.delay3 {
+  animation-delay: 0.3s;
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .skeletonPreview {
+    gap: var(--spacing-sm);
+  }
+
+  .skeletonCard {
+    width: 80px;
+    height: 50px;
+  }
+}

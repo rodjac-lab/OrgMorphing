@@ -9,13 +9,33 @@ import { TRANSITION_CONFIG, calculateCardDelay } from '../../utils/morphingConfi
 
 function SquadContainer({ squad, members, showSeniority = false, onPersonClick, squadIndex = 0, globalCardOffset = 0, staggerStrategy }) {
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <motion.div
+      style={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.4,
+        delay: squadIndex * 0.05, // Léger stagger pour apparition progressive
+        ease: [0.4, 0, 0.2, 1]
+      }}
+    >
+      <motion.div
+        style={styles.header}
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        transition={{
+          duration: 0.3,
+          delay: 0.2 + squadIndex * 0.05,
+          ease: [0.4, 0, 0.2, 1]
+        }}
+      >
         <h3 style={styles.squadName}>{squad.name}</h3>
         <span style={styles.memberCount}>
           {members.length} {members.length === 1 ? 'membre' : 'membres'}
         </span>
-      </div>
+      </motion.div>
 
       <div style={styles.membersContainer}>
         {members.map((member, cardIndexInSquad) => {
@@ -44,7 +64,7 @@ function SquadContainer({ squad, members, showSeniority = false, onPersonClick, 
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

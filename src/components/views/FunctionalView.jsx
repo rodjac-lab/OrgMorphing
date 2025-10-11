@@ -9,6 +9,7 @@
  */
 
 import React, { useMemo, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import SquadContainer from './SquadContainer.jsx';
 
 /**
@@ -117,7 +118,16 @@ function FunctionalView({ orgData, showSeniority = false, onPersonClick, zoom = 
       >
         {/* RTE Header */}
         {rte && (
-          <div style={styles.rteHeader}>
+          <motion.div
+            style={styles.rteHeader}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1]
+            }}
+          >
             <div style={styles.rteLabel}>RTE</div>
             <div style={styles.rteInfo}>
               <span style={styles.rteName}>
@@ -125,7 +135,7 @@ function FunctionalView({ orgData, showSeniority = false, onPersonClick, zoom = 
               </span>
               <span style={styles.trainName}>Train {rte.trainName}</span>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Squads container */}

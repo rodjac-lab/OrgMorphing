@@ -28,4 +28,5 @@ function ManagerCard(props) {
   return <DeveloperCard {...props} developer={props.manager} />;
 }
 
-export default ManagerCard;
+// Memoize pour éviter les re-renders inutiles
+export default React.memo(ManagerCard);

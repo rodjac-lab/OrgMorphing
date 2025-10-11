@@ -100,23 +100,26 @@ function DeveloperCard({
     borderRadius: CARD_DIMENSIONS.borderRadius,
     background: 'var(--color-surface)',
     border: '1px solid var(--color-border)',
-    boxShadow: isHovered || isFocusVisible ? CARD_SHADOW.hover : CARD_SHADOW.default,
-    transform: isHovered || isFocusVisible ? 'translateY(-2px)' : 'translateY(0)',
-    transition: 'transform var(--transition-fast), box-shadow var(--transition-fast)',
+    boxShadow: isHovered || isFocusVisible ? 'var(--shadow-lg)' : 'var(--shadow-md)',
+    transform: isHovered || isFocusVisible ? 'translateY(-3px) scale(1.02)' : 'translateY(0) scale(1)',
+    transition: 'transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast)',
     cursor: interactive ? 'pointer' : 'default',
     width: '240px',
     outline: 'none',
+    willChange: interactive ? 'transform, box-shadow' : 'auto',
+    borderColor: isHovered || isFocusVisible ? 'var(--craft-cloud)' : 'var(--color-border)',
   };
 
   const accentBarStyle = {
     position: 'absolute',
     left: 0,
     top: 0,
-    width: '6px',
+    width: isHovered || isFocusVisible ? '8px' : '6px',
     height: '100%',
     borderTopLeftRadius: CARD_DIMENSIONS.borderRadius,
     borderBottomLeftRadius: CARD_DIMENSIONS.borderRadius,
     background: craftColor,
+    transition: 'width var(--transition-fast)',
   };
 
   const badgeContainerStyle = {
