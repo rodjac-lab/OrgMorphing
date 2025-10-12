@@ -7,15 +7,39 @@
 import React from 'react';
 
 function ZoomControls({ zoom, onZoomIn, onZoomOut, onZoomReset }) {
+  const handleKeyDown = (e, action) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <button onClick={onZoomOut} style={styles.button} title="Zoom out">
+    <div style={styles.container} role="group" aria-label="Contrôles de zoom">
+      <button
+        onClick={onZoomOut}
+        onKeyDown={(e) => handleKeyDown(e, onZoomOut)}
+        style={styles.button}
+        aria-label="Dézoomer"
+        disabled={zoom <= 0.5}
+      >
         -
       </button>
-      <button onClick={onZoomReset} style={styles.button} title="Reset zoom">
+      <button
+        onClick={onZoomReset}
+        onKeyDown={(e) => handleKeyDown(e, onZoomReset)}
+        style={styles.button}
+        aria-label={`Réinitialiser le zoom, actuellement à ${Math.round(zoom * 100)}%`}
+      >
         {Math.round(zoom * 100)}%
       </button>
-      <button onClick={onZoomIn} style={styles.button} title="Zoom in">
+      <button
+        onClick={onZoomIn}
+        onKeyDown={(e) => handleKeyDown(e, onZoomIn)}
+        style={styles.button}
+        aria-label="Zoomer"
+        disabled={zoom >= 1.5}
+      >
         +
       </button>
     </div>

@@ -13,20 +13,30 @@ import styles from './SeniorityToggle.module.css';
  * @returns {JSX.Element}
  */
 function SeniorityToggle({ enabled, onChange }) {
+  const handleKeyDown = (e) => {
+    // Support clavier: Enter et Space
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onChange(!enabled);
+    }
+  };
+
   return (
     <label className={styles.toggleContainer}>
-      <Award size={16} className={styles.icon} />
-      <span className={styles.label}>Séniorité</span>
+      <Award size={16} className={styles.icon} aria-hidden="true" />
+      <span className={styles.label} id="seniority-label">Séniorité</span>
 
       <button
         type="button"
         role="switch"
         aria-checked={enabled}
-        aria-label="Afficher la séniorité"
+        aria-labelledby="seniority-label"
+        aria-label={enabled ? "Masquer les niveaux de séniorité" : "Afficher les niveaux de séniorité"}
         className={`${styles.switch} ${enabled ? styles.enabled : ''}`}
         onClick={() => onChange(!enabled)}
+        onKeyDown={handleKeyDown}
       >
-        <span className={styles.slider} />
+        <span className={styles.slider} aria-hidden="true" />
       </button>
     </label>
   );

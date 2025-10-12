@@ -18,18 +18,18 @@
 export const ROLE_BADGE_TOKENS = {
   L: {
     label: 'Lead Dev',
-    background: 'rgba(59, 130, 246, 0.16)',
-    color: '#1d4ed8',
+    background: '#2563eb',
+    color: '#ffffff',
   },
   T: {
     label: 'Tech Lead',
-    background: 'rgba(139, 92, 246, 0.16)',
-    color: '#6d28d9',
+    background: '#7c3aed',
+    color: '#ffffff',
   },
   S: {
     label: 'Scrum Master',
-    background: 'rgba(16, 185, 129, 0.16)',
-    color: '#047857',
+    background: '#059669',
+    color: '#ffffff',
   },
 };
 

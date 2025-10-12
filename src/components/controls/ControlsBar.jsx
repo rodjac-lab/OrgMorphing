@@ -43,18 +43,23 @@ function ControlsBar({
   onAddDeveloper
 }) {
   return (
-    <div className={styles.controlsBar}>
+    <header className={styles.controlsBar} role="banner">
+      {/* Skip link pour navigation rapide */}
+      <a href="#main-content" className={styles.skipLink}>
+        Aller au contenu principal
+      </a>
+
       <div className={styles.leftSection}>
         <h1 className={styles.title}>Outil de Visualisation Organisationnelle</h1>
       </div>
 
-      <div className={styles.rightSection}>
+      <nav className={styles.rightSection} aria-label="Navigation principale">
         <button
           className={styles.addButton}
           onClick={onAddDeveloper}
-          title="Ajouter un développeur"
+          aria-label="Ajouter un nouveau développeur"
         >
-          <UserPlus size={18} />
+          <UserPlus size={18} aria-hidden="true" />
           <span>Ajouter</span>
         </button>
 
@@ -84,8 +89,8 @@ function ControlsBar({
         <div className={styles.divider} />
 
         <ExportButtons orgData={orgData} onDataImported={onDataImported} />
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 }
 

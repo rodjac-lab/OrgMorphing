@@ -17,6 +17,10 @@ function ToastContainer() {
         top: 80, // En dessous de la ControlsBar
       }}
       toastOptions={{
+        // Accessibilité
+        role: 'status',
+        ariaLive: 'polite',
+
         // Durée par défaut
         duration: 3000,
 
